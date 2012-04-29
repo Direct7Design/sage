@@ -1,38 +1,34 @@
 <?php
 
-// ######################################################################
-// #                                                                    #
-// #   config.php                                                       #
-// #                                                                    #
-// #   Last Modified: 03/10/2005                                        #
-// #                                                                    #
-// #   Sage version 0.02                                                #
-// #                                                                    #
-// ######################################################################
-// #                                                                    #
-// ######################################################################
-// #                                                                    #
-// #   Copyright (C) 2005 SamuraiDev                                    #
-// #                                                                    #
-// #   This program is free software; you can redistribute it and/or    #
-// #   modify it under the terms of the GNU General Public License      #
-// #   as published by the Free Software Foundation; either version 2   #
-// #   of the License, or (at your option) any later version.           #
-// #                                                                    #
-// ######################################################################
+/*
+ * config.php                                                           
+ *                                                                      
+ * Last modified 03/18/2005 by hpxchan                                  
+ *                                                                      
+ * Sage Folding@Home Stats System, version 0.02                         
+ *                                                                      
+ * Copyright (C) 2005 SamuraiDev                                        
+ *                                                                      
+ * This program is free software; you can redistribute it and/or    
+ * modify it under the terms of the GNU General Public License      
+ * as published by the Free Software Foundation; either version 2   
+ * of the License, or (at your option) any later version.           
+ */
 
-$lockHole = 'color';
+$lock_hole = 'color';
 
-$lockKey = 'sage';
+$lock_key = 'sage';
 
-$dbHost = 'mysql_database_hostname';
+$db_type = 'mysql';
 
-$dbUser = 'mysql_database_username';
+$db_host = 'database_host';
 
-$dbPass = 'mysql_database_password';
+$db_user = 'database_user';
 
-$dbName = 'mysql_database_name';
+$db_pass = 'database_password';
 
-$teamNumber = 37941;
+$db_name = 'database_name';
+
+$team_number = 37941;
 
 ?>

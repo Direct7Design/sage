@@ -1,107 +1,72 @@
 <?php
 
-// ######################################################################
-// #                                                                    #
-// #   refresh.php                                                      #
-// #                                                                    #
-// #   Last Modified: 03/11/2005                                        #
-// #                                                                    #
-// #   Sage version 0.02                                                #
-// #                                                                    #
-// ######################################################################
-// #                                                                    #
-// ######################################################################
-// #                                                                    #
-// #   Copyright (C) 2005 SamuraiDev                                    #
-// #                                                                    #
-// #   This program is free software; you can redistribute it and/or    #
-// #   modify it under the terms of the GNU General Public License      #
-// #   as published by the Free Software Foundation; either version 2   #
-// #   of the License, or (at your option) any later version.           #
-// #                                                                    #
-// ######################################################################
+/*
+ * refresh.php                                                          
+ *                                                                      
+ * Last modified 03/18/2005 by hpxchan                                  
+ *                                                                      
+ * Sage Folding@Home Stats System, version 0.02                         
+ *                                                                      
+ * Copyright (C) 2005 SamuraiDev                                        
+ *                                                                      
+ * This program is free software; you can redistribute it and/or    
+ * modify it under the terms of the GNU General Public License      
+ * as published by the Free Software Foundation; either version 2   
+ * of the License, or (at your option) any later version.           
+ */
 
-include('config.php');
+require('config.php');
 
-if($_GET[$lockHole] != $lockKey)
-{
-	die('Killed: Unauthorized Connection');
-}
-else
-{
-	$lockHole = $lockKey;
+if($_GET[$lock_hole] != $lock_key) {
+    die('Killed: Unauthorized Connection');
+} else {
+    define('IN_SAGE', true);
 }
 
-$myLink = mysql_connect($dbHost,$dbUser,$dbPass) or die('No connection to MySQL database');
-mysql_select_db($dbName);
+require('date_lib.php');
 
-mysql_query('DROP TABLE `2005022112`;');
-mysql_query('DROP TABLE `tables_index`;');
+require('db.php');
 
-include('date_lib.php');
+$db->sql_query('DROP TABLE `2005022112`;');
+$db->sql_query('DROP TABLE `tables_index`;');
 
-function get_index_table($mode = 1)
+function get_index_table($db_object, $mode = 1)
 {
-	$indexTableSelect;
-	if($mode == 0)
-	{
-		$indexTableSelect = 'SELECT `name` FROM `tables_index` WHERE `rid` = 1;';
-	}
-	else
-	{
-		$mode = 1;
-		$indexTableSelect = 'SELECT * FROM `tables_index`;';
-	}
-	$indexTableResult = mysql_query($indexTableSelect);
-	if(!$indexTableResult)
-	{
-		return 0;
-	}
-	if($mode == 1)
-	{
-		$indexTableArray = array();
-		$i = 0;
-		while($currentRow = mysql_fetch_row($indexTableResult))
-		{
-			$indexTableArray[$i] = $currentRow;
-			$i++;
-		}
-		return $indexTableArray;
-	}
-	elseif($mode == 0)
-	{
-		$currentRow = mysql_fetch_row($indexTableResult);
-		return $currentRow[0];
-	}
+    $index_table_select;
+    if($mode == 0) {
+        $index_table_select = 'SELECT `name` FROM `tables_index` WHERE `rid` = 1;';
+    } else {
+        $mode = 1;
+        $index_table_select = 'SELECT * FROM `tables_index`;';
+    }
+    $index_table_result = $db_object->sql_query($index_table_select);
+    if(!$index_table_result) {
+        return 0;
+    }
+    if($mode == 1) {
+        $index_table_array = array();
+        $i = 0;
+        while($current_row = $db_object->sql_fetchrow($index_table_result))
+        {
+            $index_table_array[$i] = $current_row;
+            $i++;
+        }
+        return $index_table_array;
+    } elseif($mode == 0) {
+        $current_row = $db_object->sql_fetchrow($index_table_result);
+        return $current_row[0];
+    }
 }
 
 // Stanford team stats: http://vspx27.stanford.edu/daily_team_summary.txt
 // Stanford specific team stats: http://vspx27.stanford.edu/teamstats/team37941.txt
 
-$teamNumberString = (string)$teamNumber;
-$teamTablePrefix = 'team_' . $teamNumberString;
-$teamTableName = 'team_' . $teamNumberString . '_main';
-$teamTableNameLength = strlen($teamTableName);
-$userTablePrefix = $teamTablePrefix . '_user_';
-$userTablePrefixLength = strlen($userTablePrefix);
-$rankedUsersTableName = 'team_' . $teamNumberString . '_ranked_users';
-
-$teamRank;
-$teamScoreInteger;
-$teamWusInteger;
-$teamNameString;
-
-$monthInteger;
-$hourInteger;
-$dayNumberInteger;
-$yearInteger;
-
-include_once('extract_home.php');
+require_once('extract_home.php');
 
 //
 // close mysql link
 //
 
-mysql_close($myLink);
+$db->sql_close();
 
 ?>
