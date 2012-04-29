@@ -3,7 +3,7 @@
 /*
  * process_home.php                                                     
  *                                                                      
- * Last modified 04/17/2005 by hpxchan                                  
+ * Last modified 04/18/2005 by hpxchan                                  
  *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      
@@ -17,9 +17,14 @@
 
 function process_home( $rid, $insert_table, $team_number, $type, $name, $rank, $trankusers, $wus, $points, $tables, $tables_last, $db_object )
 {
+    $this_where_clause = "WHERE `rid` = '$rid';";
+    $stats_index_select = "SELECT * FROM `stats_index` " . $this_where_clause;
 
-    // temporary stats array; holds table stats until we're ready to process them
-    $initial_stats_array = array();
+    // get info from stats_index table
+    $stats_index_array = array();
+    $stats_index_handle = $db_object->sql_query( $stats_index_select ) or die( 'Cannot select from stats_index<br />' . $stats_index_select . '<br />' . $db_object->sql_error() . '<br />' );
+    $stats_index_array = $db_object->sql_fetchrow( $stats_index_handle );
+    $age = $stats_index_array[4];
 
     // $main_stats_array holds stuff we're going to put into the current table
     // we'll add more to it later
@@ -31,65 +36,65 @@ function process_home( $rid, $insert_table, $team_number, $type, $name, $rank, $
     }
 
     // if the current table is the only table (THIS PART IS NOT FUN)
-    if( $tables_last == 0 ) {
+    if( $tables_last == 0 || ( ! $age ) ) {
 
         $update_stats_index = "INSERT INTO `stats_index` (`rid`, `row_type`, `name`, `team_number`, `age`, `first_table`) VALUES ('$rid', $type, '$name', $team_number, 1, '$insert_table');";
         $db_object->sql_query( $update_stats_index ) or die( 'Could not update stats_index for ' . $name . '.<br />' . $update_stats_index . '<br />' . $db_object->sql_error() . '<br />' );
 
-        $main_stats_array['rank_last_update'] = $rank;
-        $main_stats_array['trankusers_last_update'] = $trankusers;
-        $main_stats_array['wus_last_update'] = $wus;
-        $main_stats_array['points_last_update'] = $points;
+        $main_stats_array['rank_last_update'] = 0;
+        $main_stats_array['trankusers_last_update'] = 0;
+        $main_stats_array['wus_last_update'] = 0;
+        $main_stats_array['points_last_update'] = 0;
 
-        $main_stats_array['rank_last_day'] = $rank;
-        $main_stats_array['trankusers_last_day'] = $trankusers;
-        $main_stats_array['wus_last_day'] = $wus;
-        $main_stats_array['points_last_day'] = $points;
+        $main_stats_array['rank_last_day'] = 0;
+        $main_stats_array['trankusers_last_day'] = 0;
+        $main_stats_array['wus_last_day'] = 0;
+        $main_stats_array['points_last_day'] = 0;
 
-        $main_stats_array['rank_last_week'] = $rank;
-        $main_stats_array['trankusers_last_week'] = $trankusers;
-        $main_stats_array['wus_last_week'] = $wus;
-        $main_stats_array['points_last_week'] = $points;
+        $main_stats_array['rank_last_week'] = 0;
+        $main_stats_array['trankusers_last_week'] = 0;
+        $main_stats_array['wus_last_week'] = 0;
+        $main_stats_array['points_last_week'] = 0;
 
-        $main_stats_array['rank_last_month'] = $rank;
-        $main_stats_array['trankusers_last_month'] = $trankusers;
-        $main_stats_array['wus_last_month'] = $wus;
-        $main_stats_array['points_last_month'] = $points;
+        $main_stats_array['rank_last_month'] = 0;
+        $main_stats_array['trankusers_last_month'] = 0;
+        $main_stats_array['wus_last_month'] = 0;
+        $main_stats_array['points_last_month'] = 0;
 
-        $main_stats_array['rank_last_year'] = $rank;
-        $main_stats_array['trankusers_last_year'] = $trankusers;
-        $main_stats_array['wus_last_year'] = $wus;
-        $main_stats_array['points_last_year'] = $points;
+        $main_stats_array['rank_last_year'] = 0;
+        $main_stats_array['trankusers_last_year'] = 0;
+        $main_stats_array['wus_last_year'] = 0;
+        $main_stats_array['points_last_year'] = 0;
 
-        $main_stats_array['rank_per_hour'] = $rank;
-        $main_stats_array['trankusers_per_hour'] = $trankusers;
-        $main_stats_array['wus_per_hour'] = $wus;
-        $main_stats_array['points_per_hour'] = $points;
+        $main_stats_array['rank_per_hour'] = 0;
+        $main_stats_array['trankusers_per_hour'] = 0;
+        $main_stats_array['wus_per_hour'] = 0;
+        $main_stats_array['points_per_hour'] = 0;
 
-        $main_stats_array['rank_per_update'] = $rank;
-        $main_stats_array['trankusers_per_update'] = $trankusers;
-        $main_stats_array['wus_per_update'] = $wus;
-        $main_stats_array['points_per_update'] = $points;
+        $main_stats_array['rank_per_update'] = 0;
+        $main_stats_array['trankusers_per_update'] = 0;
+        $main_stats_array['wus_per_update'] = 0;
+        $main_stats_array['points_per_update'] = 0;
 
-        $main_stats_array['rank_per_year'] = $rank;
-        $main_stats_array['trankusers_per_year'] = $trankusers;
-        $main_stats_array['wus_per_year'] = $wus;
-        $main_stats_array['points_per_year'] = $points;
+        $main_stats_array['rank_per_year'] = 0;
+        $main_stats_array['trankusers_per_year'] = 0;
+        $main_stats_array['wus_per_year'] = 0;
+        $main_stats_array['points_per_year'] = 0;
 
-        $main_stats_array['rank_per_day'] = $rank;
-        $main_stats_array['trankusers_per_day'] = $trankusers;
-        $main_stats_array['wus_per_day'] = $wus;
-        $main_stats_array['points_per_day'] = $points;
+        $main_stats_array['rank_per_day'] = 0;
+        $main_stats_array['trankusers_per_day'] = 0;
+        $main_stats_array['wus_per_day'] = 0;
+        $main_stats_array['points_per_day'] = 0;
 
-        $main_stats_array['rank_per_week'] = $rank;
-        $main_stats_array['trankusers_per_week'] = $trankusers;
-        $main_stats_array['wus_per_week'] = $wus;
-        $main_stats_array['points_per_week'] = $points;
+        $main_stats_array['rank_per_week'] = 0;
+        $main_stats_array['trankusers_per_week'] = 0;
+        $main_stats_array['wus_per_week'] = 0;
+        $main_stats_array['points_per_week'] = 0;
 
-        $main_stats_array['rank_per_month'] = $rank;
-        $main_stats_array['trankusers_per_month'] = $trankusers;
-        $main_stats_array['wus_per_month'] = $wus;
-        $main_stats_array['points_per_month'] = $points;
+        $main_stats_array['rank_per_month'] = 0;
+        $main_stats_array['trankusers_per_month'] = 0;
+        $main_stats_array['wus_per_month'] = 0;
+        $main_stats_array['points_per_month'] = 0;
     
         $main_stats_array['points_per_wu'] = floor( $points / $wus );
 
@@ -102,7 +107,12 @@ function process_home( $rid, $insert_table, $team_number, $type, $name, $rank, $
 
         $this_where_clause = "WHERE `rid` = '$rid';";
         $last_table_select = "SELECT * FROM `" . $tables[( $tables_last - 1 )]['name'] . "` " . $this_where_clause;
-        $stats_index_select = "SELECT * FROM `stats_index` " . $this_where_clause;
+
+        // increment age and update the table
+        $age++;
+        $stats_index_update = "UPDATE `stats_index` SET `age`=" . $age . ' ' . $this_where_clause;
+        $db_object->sql_query( $stats_index_update ) or die( 'Could not update stats_index<br />' . $stats_index_update . '<br />' . $db_object->sql_error() . '<br />' );
+        $first_table = $stats_index_array[5];
 
         // get info from last table
         $last_table_array = array();

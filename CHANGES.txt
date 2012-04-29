@@ -4,7 +4,7 @@
  * Log of all major project changes (as many as we can document
  * while retaining our sanity, at least ;-) )
  *
- * Last modified 04/17/2005 by hpxchan                                  
+ * Last modified 04/18/2005 by hpxchan                                  
  *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      
@@ -60,3 +60,9 @@ or a combination of the letter "t" and the team number for teams. This
 allows us to more easily locate fields in a table, and helps us work
 around those nasty duplicate usernames (under the same team). A few
 minor fixes and optimizations have been made to the backend code.
+
+    1.1.1
+
+The initial run code (the code that is executed the first time you run
+Sage with a particular database) has been cleaned up, resulting in
+extremely more accurate stats off the bat.
