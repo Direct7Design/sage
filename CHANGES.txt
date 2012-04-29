@@ -1,0 +1,104 @@
+/*
+ * CHANGES                                                     
+ *                                                                      
+ * Log of all major project changes (as many as we can document
+ * while retaining our sanity, at least ;-) )
+ *
+ * Last modified 04/24/2005 by hpxchan                                  
+ *                                                                      
+ * Copyright (C) 2005 SamuraiDev                                        
+ *                                                                      
+ * This program is free software; you can redistribute it and/or    
+ * modify it under the terms of the GNU General Public License      
+ * as published by the Free Software Foundation; either version 2   
+ * of the License, or (at your option) any later version.           
+ */
+
+    0.01
+
+Sage comes into existence, and does a pretty poor job at it.
+
+    1.0.0 - 1.0.4
+
+We made a number of major fundamental changes, including redesign of
+the database structure, general code reorganization, and a complete
+redesign of the frontend GUI. The README was redesigned, and the
+CONTRIB, CHANGES, and LICENSE files were added to the slew. Sage
+0.01 was a complete mess, so 1.0.* is an attempt to approach the
+problem (of stats extraction, processing, and display) in a totally
+different way, circumventing many of the obstacles encountered by
+0.01 in the process. We changed our numbering system to Linux kernel
+version style, so 1.0.* was originally intended to be named 0.02.
+Versions 1.0.0 to 1.0.4 specifically were partial releases of the Sage 
+backend processing scripts. There's pretty much only one thing 0.01
+and 1.0.0 have in common - the name.
+
+    1.0.5
+
+Sage 1.0.5 is the first release containing the complete sources for
+the Sage 1.0.* backend. It does not contain the frontend.
+
+    1.0.6
+
+Sage 1.0.6 contains sources for the backend only, similar to 1.0.5.
+A division by zero bug is fixed, and a few database table structures
+are optimized.
+
+    1.0.7
+
+Another critical division by zero bug has been fixed, and the code for
+processing points_per_wu has been moved out of the conditional blocks
+and into the main part of the process_home function (since it is
+processed the same way, regardless of the number of existing tables).
+
+    1.1.0
+
+A frontend is introduced to the previous 1.0.* releases, making this
+the first complete version of Sage since 0.01. MD5 is used to make a
+checksum for a combination of the team number and user name for users,
+or a combination of the letter "t" and the team number for teams. This
+allows us to more easily locate fields in a table, and helps us work
+around those nasty duplicate usernames (under the same team). A few
+minor fixes and optimizations have been made to the backend code.
+
+    1.1.1
+
+The initial run code (the code that is executed the first time you run
+Sage with a particular database) has been cleaned up, resulting in
+extremely more accurate stats off the bat.
+
+    1.1.2
+
+The date has been changed from that provided by Stanford (on the stats
+pages) to the date of the server running Sage. Also, CURL and its
+functions have replaced the insecure fopen.
+
+    1.1.3
+
+Fixed an off-by-one error in process_home.php that prevented the eighth
+table from being created, stopping the application in its tracks.
+
+    1.1.4
+
+The code in extract_home.php has been optimized slightly, and a "size"
+parameter has been added to the select list in header.php.
+
+    1.1.5
+
+"+" prefixed to all Last and Per stats above zero, for clarity's sake.
+New project contributor added: "Midnight Dream". Database interaction
+error handlers have been revised to return the error produced by the
+corresponding database API. Bug fixed in process_home.php where certain
+database SELECT queries would search for "Array" (the correct value is
+index 1 of that array). The process_home function has been eliminated;
+instead, process_home.php and extract_home.php have been modified so
+that process_home.php is included each time it is needed. This way,
+process_home.php can use global variables instead of local function
+variables. Processing method revised - instead of looping
+through each user, selecting his/her stats for the tables one day ago,
+one week ago, one month ago, and one year ago (respectively), we now
+collect all data from those tables into a few PHP array variables at
+the start, and refer to the data in those arrays later when we need them.
+This may make Sage suck up an additional megabyte or two of memory, but
+that is much better than the processing power inhaled by thousands of
+database queries (for large teams). display.php renamed to index.php.
