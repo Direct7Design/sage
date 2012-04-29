@@ -25,6 +25,8 @@ require( 'date_lib.php' );
 
 require( 'db.php' );
 
+/* This function is repeated twice, I kept it in the db.php file and commented it out here,
+pending review for deletition from refresh.php
 function get_index_table( $db_object, $index_table_name, $mode = 1 )
 {
 
@@ -55,7 +57,7 @@ function get_index_table( $db_object, $index_table_name, $mode = 1 )
         return 1;
     }
 
-}
+}*/
 
 // Stanford team stats: http://vspx27.stanford.edu/daily_team_summary.txt
 // Stanford specific team stats: http://vspx27.stanford.edu/teamstats/team37941.txt
