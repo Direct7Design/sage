@@ -1,14 +1,14 @@
 FOLDING@HOME TEAM STATS: Team # 37941
 
 
-Mon Feb 21 12:00:00 PST 2005
+Mon Feb 21 15:00:00 PST 2005
 team	teamname	score	wu
 37941	SamuraiBlog.com	435463.401184082	3218
 Team rank: 317
 
 Team members:
 rank	team rank	name	credit	total	team
-3267	1	samuraisam	95678	606	37941
+3267	1	samuraisam	95680	616	37941
 3432	2	Papsomax	91666	643	37941
 4811	3	hpxchan	69711	331	37941
 13853	4	kcenter_8830	28239	195	37941

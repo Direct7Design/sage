@@ -3,7 +3,7 @@
 /*
  * extract_home.php                                                     
  *                                                                      
- * Last modified 03/18/2005 by hpxchan                                  
+ * Last modified 03/28/2005 by hpxchan                                  
  *                                                                      
  * Sage Folding@Home Stats System, version 0.02                         
  *                                                                      
@@ -26,8 +26,7 @@ if(!get_index_table($db, 0)) {
 
 require('process_home.php');
 
-//$stanford_team_url = 'http://vspx27.stanford.edu/teamstats/team' . $team_number . '.txt';
-$stanford_team_url = 'home.txt';
+$stanford_team_url = 'http://vspx27.stanford.edu/teamstats/team' . $team_number . '.txt';
 
 $team_users = 0;
 
@@ -88,17 +87,17 @@ while(!feof($team_page_handle))
         $user_wus = $user_array[4];
         $user_team_number = $user_array[5];
         $team_users = $user_team_rank;
-        process_home($current_table_name, $user_team_number, 1, $user_name, $user_overall_rank, $user_team_rank, $user_wus, $user_points, $tables_array, $tables_array_last, $db_object);
+        process_home($current_table_name, $user_team_number, 1, $user_name, $user_overall_rank, $user_team_rank, $user_wus, $user_points, $tables_array, $tables_array_last, $db);
         $user_insert = "INSERT INTO `$current_table_name` (team_number, row_type, name, rank, trankusers, wus, points) VALUES ($user_team_number, 1, '$user_name', $user_overall_rank, $user_team_rank, $user_wus, $user_points);";
-        $db->sql_query($user_insert) or die('Could not insert user row for ' . $user_name . ' into table ' . $current_table_name . '<br />' . $user_insert . '<br />' . $db->sql_error());
+        //$db->sql_query($user_insert) or die('Could not insert user row for ' . $user_name . ' into table ' . $current_table_name . '<br />' . $user_insert . '<br />' . $db->sql_error());
     }
 
     $lines_count++;
 }
 
-process_home($current_table_name, $team_number, 0, $team_name, $team_rank, $team_users, $team_wus, $team_points, $tables_array, $tables_array_last, $db_object);
+process_home($current_table_name, $team_number, 0, $team_name, $team_rank, $team_users, $team_wus, $team_points, $tables_array, $tables_array_last, $db);
 $team_insert = "INSERT INTO `$current_table_name` (team_number, row_type, name, rank, trankusers, wus, points) VALUES ($team_number, 0, '$team_name', $team_rank, $team_users, $team_wus, $team_points);";
-$db->sql_query($team_insert) or die('Could not insert team row for ' . $team_name . ' into table ' . $current_table_name . '<br />' . $team_insert . '<br />' . $db->sql_error());
+//$db->sql_query($team_insert) or die('Could not insert team row for ' . $team_name . ' into table ' . $current_table_name . '<br />' . $team_insert . '<br />' . $db->sql_error());
 
 fclose($team_page_handle);
 
