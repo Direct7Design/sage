@@ -1,0 +1,32 @@
+/*
+ * CHANGES                                                     
+ *                                                                      
+ * Log of all major project changes (as many as we can document
+ * while retaining our sanity, at least ;-) )
+ *
+ * Last modified 03/12/2005 by hpxchan                                  
+ *                                                                      
+ * Sage Folding@Home Stats System, version 0.02                         
+ *                                                                      
+ * Copyright (C) 2005 SamuraiDev                                        
+ *                                                                      
+ * This program is free software; you can redistribute it and/or    
+ * modify it under the terms of the GNU General Public License      
+ * as published by the Free Software Foundation; either version 2   
+ * of the License, or (at your option) any later version.           
+ */
+
+    0.01
+
+Sage comes into existence
+
+    0.02
+
+We made a number of major fundamental changes, including redesign of
+the database structure, general code reorganization, and a complete
+redesign of the frontend GUI. The README was redesigned, and the
+CONTRIB, CHANGES, and LICENSE files were added to the slew. Sage
+0.01 was a complete mess, so 0.02 is an attempt to approach the
+problem (of stats extraction, processing, and display) in a totally
+different way, circumventing many of the obstacles encountered by
+0.01 in the process.
