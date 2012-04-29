@@ -1,135 +1,137 @@
-/*
- * README                                                     
- *                                                                      
- * Read me first for installation help, notes, and references
- *
- * Last modified 04/24/2005 by hpxchan                                  
- *                                                                      
- * Copyright (C) 2005 SamuraiDev                                        
- *                                                                      
- * This program is free software; you can redistribute it and/or    
- * modify it under the terms of the GNU General Public License      
- * as published by the Free Software Foundation; either version 2   
- * of the License, or (at your option) any later version.           
- */
+ README
+======
+                                                     
+                                                                      
+ Read me first for installation help, notes, and references
+-----------------------------------------------------------
 
-/******************************
- * I.    Table of Contents    
- ******************************/
+
+ Last modified 04/24/2005 by hpxchan                                  
+                                                                      
+ Copyright (C) 2005 SamuraiDev                                        
+                                                                      
+ This program is free software; you can redistribute it and/or    
+ modify it under the terms of the GNU General Public License      
+ as published by the Free Software Foundation; either version 2   
+ of the License, or (at your option) any later version.           
+
+
 
 I.    Table of Contents
+-----------------------
+
 
 II.   Project Files List
-    A.    README.txt
-    B.    CHANGES.txt
-    C.    CONTRIB.txt
-    D.    LICENSE.txt
-    E.    config.php
-    F.    date_lib.php
-    G.    refresh.php
-    H.    extract_home.php
-    I.    process_home.php
-    J.    index.php
-    K.    list.php
-    L.    header.php
-    M.    footer.php
-    N.    default.css
+    -    README.txt
+    -    CHANGES.txt
+    -    CONTRIB.txt
+    -    LICENSE.txt
+    -    config.php
+    -    date_lib.php
+    -    refresh.php
+    -    extract_home.php
+    -    process_home.php
+    -    index.php
+    -    list.php
+    -    header.php
+    -    footer.php
+    -    default.css
 
 III.  System Requirements
-    A.    Server programming languages
-    B.    Server database system
-    C.    Client web browser
+    -    Server programming languages
+    -    Server database system
+    -    Client web browser
 
 IV.   Installation and Operation
-    A.    General installation directions
-    B.    General operation directions
-    C.    Unix-specific additional information
+    -    General installation directions
+    -    General operation directions
+    -    Unix-specific additional information
 
-V.    Notes and Warnings
+*  Notes and Warnings
 
-VI.   Project Management
+*  Project Management
    
-/******************************
- * II.   Project Files List
- ******************************/
 
- * A.    README.txt
+*  Project Files List
+
+
+*  README.md
 
 Contains general project information, installation and operating guides,
 system requirements, project management information (including contact
 information).
 
- * B.    CHANGES.txt
+ *    CHANGES.txt
 
 A log of all significant changes made directly to the Sage project, organized
 by release.
 
- * C.    CONTRIB.txt
+ *    CONTRIB.txt
 
 A list of all project contributors, including developers, beta-testers,
 financial donors, particularly useful feedback-giving users, etc.
 
- * D.    LICENSE.txt
+ *    LICENSE.txt
 
 The full license under which the Sage Folding@Home Stats System is made
 available to you, whoever you are. 
 
- * E.    config.php
+ *    config.php
 
 A php file consisting of a number of program-critical variable definitions
 used as configuration options, included at the top of the refresh.php driver
 script.
 
- * F.    date_lib.php
+ *    date_lib.php
 
 A general (not Sage-specific) library of functions dealing with date and
 time issues (obviously, ones that have not already been covered in the 
 official PHP function set).
 
- * G.    refresh.php
+ *    refresh.php
 
 The driver script for the Sage backend (the processing that occurs
 periodically to update the stats on your server). Includes date_lib.php,
 config.php, and extract_home.php.
 
- * H.    extract_home.php
+ *    extract_home.php
 
 Helper script included by refresh.php. Extracts user and team information
 from Stanford's Folding@Home stats text files, sorts the relevant values
 into variables, and passes those variables into functions from
 process_home.php. Includes process_home.php.
 
- * I.    process_home.php
+ *    process_home.php
 
 Library of Sage-specific stats-processing functions included by other scripts
 in Sage to process relevant information and insert it into the database.
 
- * J.    index.php
+ *    index.php
 
 Primary display script for the Sage frontend. Handles team and user summaries.
 
- * K.    list.php
+ *    list.php
 
 Secondary display script for the Sage frontend. Displays lists of users, teams.
 
- * L.    header.php
+ *    header.php
 
 Universal header for the Sage frontend; required by all frontend driver scripts
 (like index.php and list.php).
 
- * M.    footer.php
+ *    footer.php
 
 Universal footer for the Sage frontend; required by all frontend driver scripts
 (like index.php and list.php).
 
- * N.    default.css
+ *    default.css
 
 Default external stylesheet for the Sage frontend pages.
    
 
-/******************************
- * III.  System Requirements
- ******************************/
+III.  System Requirements
+-------------------------
+
 
          THIS SECTION NEEDS TO BE UPDATED!!
 
@@ -265,10 +267,10 @@ If you have any questions, suggestions, comments, requests, etc. please
 let us know. We can be reached through the following:
 
 SamuraiDev website:
-    http://samuraidev.com
+    http;//samuraidev,com
 
 Sage at SourceForge:
-    http://sourceforge.net/projects/sage-stats
+    http;//sourceforge.net/projects/sage-stats
 
 Project leader (hpxchan) email:
     hpxchan [at] gmail [dot] com
