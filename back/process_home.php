@@ -3,9 +3,7 @@
 /*
  * process_home.php                                                     
  *                                                                      
- * Last modified 04/16/2005 by hpxchan                                  
- *                                                                      
- * Sage Folding@Home Stats System, version 1.0.7                         
+ * Last modified 04/17/2005 by hpxchan                                  
  *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      
@@ -17,7 +15,7 @@
 
 // $type is 1 for user stats, 0 for team stats
 
-function process_home( $insert_table, $team_number, $type, $name, $rank, $trankusers, $wus, $points, $tables, $tables_last, $db_object )
+function process_home( $rid, $insert_table, $team_number, $type, $name, $rank, $trankusers, $wus, $points, $tables, $tables_last, $db_object )
 {
 
     // temporary stats array; holds table stats until we're ready to process them
@@ -25,7 +23,7 @@ function process_home( $insert_table, $team_number, $type, $name, $rank, $tranku
 
     // $main_stats_array holds stuff we're going to put into the current table
     // we'll add more to it later
-    $main_stats_array = array( 'team_number' => $team_number, 'row_type' => $type, 'name' => $name, 'rank' => $rank, 'trankusers' => $trankusers, 'wus' => $wus, 'points' => $points );
+    $main_stats_array = array( 'rid' => $rid, 'team_number' => $team_number, 'row_type' => $type, 'name' => $name, 'rank' => $rank, 'trankusers' => $trankusers, 'wus' => $wus, 'points' => $points );
     if( $wus >= 1 ) {
         $main_stats_array['points_per_wu'] = floor( $points / $wus );
     } else {
@@ -35,7 +33,7 @@ function process_home( $insert_table, $team_number, $type, $name, $rank, $tranku
     // if the current table is the only table (THIS PART IS NOT FUN)
     if( $tables_last == 0 ) {
 
-        $update_stats_index = "INSERT INTO `stats_index` (`row_type`, `name`, `team_number`, `age`, `first_table`) VALUES ($type, '$name', $team_number, 1, '$insert_table');";
+        $update_stats_index = "INSERT INTO `stats_index` (`rid`, `row_type`, `name`, `team_number`, `age`, `first_table`) VALUES ('$rid', $type, '$name', $team_number, 1, '$insert_table');";
         $db_object->sql_query( $update_stats_index ) or die( 'Could not update stats_index for ' . $name . '.<br />' . $update_stats_index . '<br />' . $db_object->sql_error() . '<br />' );
 
         $main_stats_array['rank_last_update'] = $rank;
@@ -102,25 +100,9 @@ function process_home( $insert_table, $team_number, $type, $name, $rank, $tranku
 
         // get info from the stats table submitted last update
 
-        $last_table_select = "SELECT * FROM `" . $tables[( $tables_last - 1 )]['name'] . "` ";
-        $stats_index_select = "SELECT * FROM `stats_index` ";
-        $this_where_clause;
-
-        // for team stats
-        if( $type == 0 ) {
-
-            $last_table_select .= "WHERE `row_type` = 0 AND `team_number` = $team_number;";
-            $this_where_clause = "WHERE `row_type` = 0 AND `team_number` = $team_number;";
-            $stats_index_select .= $this_where_clause;
-
-        // for user stats
-        } elseif( $type == 1 ) {
-
-            $last_table_select .= "WHERE `row_type` = 1 AND `name` = '" . $name . "';";
-            $this_where_clause .= "WHERE `row_type` = 1 AND `name` = '" . $name . "';";
-            $stats_index_select .= $this_where_clause;
-
-        }
+        $this_where_clause = "WHERE `rid` = '$rid';";
+        $last_table_select = "SELECT * FROM `" . $tables[( $tables_last - 1 )]['name'] . "` " . $this_where_clause;
+        $stats_index_select = "SELECT * FROM `stats_index` " . $this_where_clause;
 
         // get info from last table
         $last_table_array = array();
@@ -290,7 +272,7 @@ function process_home( $insert_table, $team_number, $type, $name, $rank, $tranku
 
     // add field values to $process_insert_query
     foreach( $main_stats_array as $key => $value ) {
-        if ( $key == 'name' ) {
+        if ( $key == 'name' || $key == 'rid' ) {
             $process_insert_query .= "'$value'";
         } else {
             $process_insert_query .= $value;

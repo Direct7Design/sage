@@ -3,9 +3,7 @@
 /*
  * extract_home.php                                                     
  *                                                                      
- * Last modified 04/16/2005 by hpxchan                                  
- *                                                                      
- * Sage Folding@Home Stats System, version 1.0.7                         
+ * Last modified 04/17/2005 by hpxchan                                  
  *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      
@@ -20,12 +18,12 @@ if( !defined('IN_SAGE') ) {
 }
 
 if( !get_index_table( $db, 'tables_index', 0 ) ) {
-    $make_index = 'CREATE TABLE `tables_index` (rid MEDIUMINT AUTO_INCREMENT NOT NULL PRIMARY KEY, name CHAR(12)) TYPE=MyISAM;';
+    $make_index = 'CREATE TABLE `tables_index` (rid MEDIUMINT AUTO_INCREMENT NOT NULL PRIMARY KEY, name CHAR(10));';
     $db->sql_query( $make_index ) or die( 'Could not create index table tables_index <br />' . $make_index . '<br />' . $db->sql_error() );;
 }
 
 if( !get_index_table( $db, 'stats_index', 0 ) ) {
-    $make_index = 'CREATE TABLE `stats_index` (rid MEDIUMINT AUTO_INCREMENT NOT NULL PRIMARY KEY, row_type SMALLINT, team_number MEDIUMINT, name VARCHAR(75), age MEDIUMINT, first_table CHAR(12)) TYPE=MyISAM;';
+    $make_index = 'CREATE TABLE `stats_index` (rid VARCHAR(32) NOT NULL PRIMARY KEY, row_type SMALLINT, team_number MEDIUMINT, name VARCHAR(75), age MEDIUMINT, first_table CHAR(10));';
     $db->sql_query( $make_index ) or die( 'Could not create index table stats_index <br />' . $make_index . '<br />' . $db->sql_error() );;
 }
 
@@ -42,9 +40,12 @@ $team_number;
 $team_points;
 $team_wus;
 $team_rank;
+$team_rid;
 
 $tables_array = array();
 $tables_array_last = 0;
+
+$done_array = array();
 
 $team_page_handle = fopen( $stanford_team_url, 'r' );
 
@@ -70,7 +71,8 @@ while( !feof( $team_page_handle ) )
         $year = Trim( $date_array[5] );
 
         $current_table_name = '' . $year . add_leading_zeros( $month, 2 ) . add_leading_zeros( $day_of_month, 2 ) . add_leading_zeros( $hour, 2 );
-        $table_create = 'CREATE TABLE `' . $current_table_name . '` (row_id MEDIUMINT AUTO_INCREMENT PRIMARY KEY NOT NULL, team_number MEDIUMINT, row_type SMALLINT, name VARCHAR(75), rank INT, rank_last_update MEDIUMINT, rank_last_day MEDIUMINT, rank_last_week MEDIUMINT, rank_last_month INT, rank_last_year INT, rank_per_hour MEDIUMINT, rank_per_update MEDIUMINT, rank_per_day MEDIUMINT, rank_per_week MEDIUMINT, rank_per_month INT, rank_per_year INT, trankusers INT, trankusers_last_update MEDIUMINT, trankusers_last_day MEDIUMINT, trankusers_last_week MEDIUMINT, trankusers_last_month MEDIUMINT, trankusers_last_year INT, trankusers_per_hour MEDIUMINT, trankusers_per_update MEDIUMINT, trankusers_per_day MEDIUMINT, trankusers_per_week MEDIUMINT, trankusers_per_month MEDIUMINT, trankusers_per_year INT, wus BIGINT, wus_last_update MEDIUMINT, wus_last_day MEDIUMINT, wus_last_week INT, wus_last_month INT, wus_last_year BIGINT, wus_per_hour MEDIUMINT, wus_per_update MEDIUMINT, wus_per_day MEDIUMINT, wus_per_week INT, wus_per_month INT, wus_per_year BIGINT, points BIGINT, points_last_update INT, points_last_day INT, points_last_week INT, points_last_month BIGINT, points_last_year BIGINT, points_per_hour MEDIUMINT, points_per_update INT, points_per_day INT, points_per_week INT, points_per_month BIGINT, points_per_year BIGINT, points_per_wu MEDIUMINT) TYPE=MyISAM;';
+        $current_table_name = substr( $current_table_name, 0, 10 );
+        $table_create = 'CREATE TABLE `' . $current_table_name . '` (rid VARCHAR(32) PRIMARY KEY NOT NULL, team_number MEDIUMINT, row_type SMALLINT, name VARCHAR(75), rank INT, rank_last_update MEDIUMINT, rank_last_day MEDIUMINT, rank_last_week MEDIUMINT, rank_last_month INT, rank_last_year INT, rank_per_hour MEDIUMINT, rank_per_update MEDIUMINT, rank_per_day MEDIUMINT, rank_per_week MEDIUMINT, rank_per_month INT, rank_per_year INT, trankusers INT, trankusers_last_update MEDIUMINT, trankusers_last_day MEDIUMINT, trankusers_last_week MEDIUMINT, trankusers_last_month MEDIUMINT, trankusers_last_year INT, trankusers_per_hour MEDIUMINT, trankusers_per_update MEDIUMINT, trankusers_per_day MEDIUMINT, trankusers_per_week MEDIUMINT, trankusers_per_month MEDIUMINT, trankusers_per_year INT, wus BIGINT, wus_last_update MEDIUMINT, wus_last_day MEDIUMINT, wus_last_week INT, wus_last_month INT, wus_last_year BIGINT, wus_per_hour MEDIUMINT, wus_per_update MEDIUMINT, wus_per_day MEDIUMINT, wus_per_week INT, wus_per_month INT, wus_per_year BIGINT, points BIGINT, points_last_update INT, points_last_day INT, points_last_week INT, points_last_month BIGINT, points_last_year BIGINT, points_per_hour MEDIUMINT, points_per_update INT, points_per_day INT, points_per_week INT, points_per_month BIGINT, points_per_year BIGINT, points_per_wu MEDIUMINT);';
         $db->sql_query( $table_create ) or die( 'Could not create table ' . $current_table_name . '<br />' . $table_create . '<br />' . $db->sql_error() );
 
         $tables_update = "INSERT INTO `tables_index` (name) VALUES ('$current_table_name');";
@@ -86,6 +88,7 @@ while( !feof( $team_page_handle ) )
         $team_name = addslashes( $team_array[1] );
         $team_points = floor( $team_array[2] );
         $team_wus = $team_array[3];
+        $team_rid = md5( 't' . $team_number );
 
     } elseif( $lines_count == 6 ) { // if it is the team rank line
 
@@ -102,14 +105,20 @@ while( !feof( $team_page_handle ) )
         $user_wus = $user_array[4];
         $user_team_number = $user_array[5];
         $team_users = $user_team_rank;
-
-        process_home( $current_table_name, $user_team_number, 1, $user_name, $user_overall_rank, $user_team_rank, $user_wus, $user_points, $tables_array, $tables_array_last, $db );
+        $user_rid = md5( $team_number . stripslashes( $user_name ) );
+        if( ! $done_array[$user_rid] ) {
+            process_home( $user_rid, $current_table_name, $user_team_number, 1, $user_name, $user_overall_rank, $user_team_rank, $user_wus, $user_points, $tables_array, $tables_array_last, $db, $done_array );
+            $done_array[$user_rid] = 1;
+        }
     }
 
     $lines_count++;
 }
 
-process_home( $current_table_name, $team_number, 0, $team_name, $team_rank, $team_users, $team_wus, $team_points, $tables_array, $tables_array_last, $db );
+if( ! $done_array[$team_rid] ) {
+    process_home( $team_rid, $current_table_name, $team_number, 0, $team_name, $team_rank, $team_users, $team_wus, $team_points, $tables_array, $tables_array_last, $db, $done_array );
+    $done_array[$team_rid] = 1;
+}
 
 fclose( $team_page_handle );
 

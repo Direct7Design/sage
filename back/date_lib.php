@@ -396,4 +396,15 @@ function add_to_hour_24($base_hour, $add_hour)
     return $base_hour;
 }
 
+function extend_numeric_date( $numeric_date )
+{
+    $date_out = number_to_month( ( (int) substr( $numeric_date, 4, 2 ) ) );
+    $date_out .= ' ' . ( (int) substr( $numeric_date, 6, 2 ) );
+    $date_out .= ', ' . ( (int) substr( $numeric_date, 0, 4 ) );
+    $hour_array = hour_24_to_12( ( (int) substr( $numeric_date, 8, 2 ) ) );
+    $date_out .= '; ' . $hour_array[0] . ' ' . $hour_array[1];
+
+    return $date_out;
+}
+
 ?>

@@ -26,31 +26,31 @@ if(!defined('IN_SAGE')) {
 switch($db_type)
 {
     case 'mysql':
-        include('db/mysql.php');
+        require('db/mysql.php');
         break;
 
     case 'mysql4':
-        include('db/mysql4.php');
+        require('db/mysql4.php');
         break;
 
     case 'postgres':
-        include('db/postgres7.php');
+        require('db/postgres7.php');
         break;
 
     case 'mssql':
-        include('db/mssql.php');
+        require('db/mssql.php');
         break;
 
     case 'oracle':
-        include('db/oracle.php');
+        require('db/oracle.php');
         break;
 
     case 'msaccess':
-        include('db/msaccess.php');
+        require('db/msaccess.php');
         break;
 
     case 'mssql-odbc':
-        include('db/mssql-odbc.php');
+        require('db/mssql-odbc.php');
         break;
 }
 
@@ -59,6 +59,38 @@ $db = new sql_db($db_host, $db_user, $db_pass, $db_name, false);
 if(!$db->db_connect_id)
 {
    die('Could not connect to the database');
+}
+
+function get_index_table( $db_object, $index_table_name, $mode = 1 )
+{
+
+    $index_table_select;
+
+    if( $mode == 0 ) {
+        $index_table_select = 'SELECT `rid` FROM `' . $index_table_name . '` WHERE `rid` = 1;';
+    } elseif( $mode == 1 ) {
+        $index_table_select = 'SELECT * FROM `' . $index_table_name . '`;';
+    }
+
+    $index_table_result = $db_object->sql_query( $index_table_select );
+
+    if( !$index_table_result ) {
+        return 0;
+    }
+
+    if( $mode == 1 ) {
+        $index_table_array = array();
+        $i = 0;
+        while( $current_row = $db_object->sql_fetchrow( $index_table_result ) )
+        {
+            $index_table_array[$i] = $current_row;
+            $i++;
+        }
+        return $index_table_array;
+    } elseif( $mode == 0 ) {
+        return 1;
+    }
+
 }
 
 ?>

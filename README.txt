@@ -5,8 +5,6 @@
  *
  * Last modified 04/16/2005 by hpxchan                                  
  *                                                                      
- * Sage Folding@Home Stats System, version 1.0.7                         
- *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      
  * This program is free software; you can redistribute it and/or    
@@ -22,15 +20,20 @@
 I.    Table of Contents
 
 II.   Project Files List
-    A.    README
-    B.    CHANGES
-    C.    CONTRIB
-    D.    LICENSE
+    A.    README.txt
+    B.    CHANGES.txt
+    C.    CONTRIB.txt
+    D.    LICENSE.txt
     E.    config.php
     F.    date_lib.php
     G.    refresh.php
     H.    extract_home.php
     I.    process_home.php
+    J.    display.php
+    K.    list.php
+    L.    header.php
+    M.    footer.php
+    N.    default.css
 
 III.  System Requirements
     A.    Server programming languages
@@ -50,23 +53,23 @@ VI.   Project Management
  * II.   Project Files List
  ******************************/
 
- * A.    README
+ * A.    README.txt
 
 Contains general project information, installation and operating guides,
 system requirements, project management information (including contact
 information).
 
- * B.    CHANGES
+ * B.    CHANGES.txt
 
 A log of all significant changes made directly to the Sage project, organized
 by release.
 
- * C.    CONTRIB
+ * C.    CONTRIB.txt
 
 A list of all project contributors, including developers, beta-testers,
 financial donors, particularly useful feedback-giving users, etc.
 
- * D.    LICENSE
+ * D.    LICENSE.txt
 
 The full license under which the Sage Folding@Home Stats System is made
 available to you, whoever you are. 
@@ -100,7 +103,30 @@ process_home.php. Includes process_home.php.
 
 Library of Sage-specific stats-processing functions included by other scripts
 in Sage to process relevant information and insert it into the database.
+
+ * J.    display.php
+
+Primary display script for the Sage frontend. Handles team and user summaries.
+
+ * K.    list.php
+
+Secondary display script for the Sage frontend. Displays lists of users, teams.
+
+ * L.    header.php
+
+Universal header for the Sage frontend; required by all frontend driver scripts
+(like display.php and list.php).
+
+ * M.    footer.php
+
+Universal footer for the Sage frontend; required by all frontend driver scripts
+(like display.php and list.php).
+
+ * N.    default.css
+
+Default external stylesheet for the Sage frontend pages.
    
+
 /******************************
  * III.  System Requirements
  ******************************/
@@ -113,7 +139,11 @@ in Sage to process relevant information and insert it into the database.
  * B.    Server database system
          *       Database system with one of the following SQL-based database APIs:
                  *       MySQL 3.? or later
-                 *       PostgreSQL ? or later
+                 *       PostgreSQL 7.? or later
+                 *       MSSQL ? or later
+                 *       MS Access ? or later
+                 *       Oracle ? or later
+                 *       DB2 ? or later
 
  * C.    Client web browser
          *       Ummm... general W3C-compliant browser... preferably not IE...
@@ -197,7 +227,7 @@ If that page does not exist, the desired team is probably too low in the ranking
 and Sage will /not/ work for that team.
 
 Do /NOT/ run the Sage stats-refreshing script (refresh.php, unless something changes)
-more than once every three hours. Stanford updates approximately this often, and
+more than once every three hours. Stanford updates approximately every three hours, so
 it would be (a) pointless, (b) hopefully resultless, and (c) rude to Stanford to try
 and update your stats more often than the source the stats come from (Stanford).
 
@@ -205,21 +235,22 @@ Want to help with Sage? Contact us through one of the methods listed in ``Projec
 Management''. All contributions are appreciated!
 
 Future features (tentative, of course... just cool things we'd like to see):
- * Graphical stats signatures, like those of LiquidNinjas and DinoSig (I think)
+ * Graphical stats signatures, like those of LiquidNinjas and DinoSig
  * Dynamic graphs for the stats pages, like those of EOC (we can't stand to use
    a trial version of a commercial dynamic image-generation program, so we're
    holding graphs off until we (a) develop our own dynamic image-generation program,
-   or (b) find an available open-source one.
+   or (b) find an available open-source one).
  * Tetris. Probably based on Flash or Java. Can't wait for the next update, when your
    team takes the number one spot from those sneaky Australians? Don't! Play Tetris!
- * Global stats (for all teams). This feature will be implemented in a branch of
-   Sage separate from the primary individual team stats. We (the project management)
-   will maintain both branches as long as there is need for them.
+ * Global stats (for all teams). This feature will be integrated into the primary
+   Sage release, and one will be able to toggle on or off through the configuration
+   file.
  * More stats configuration. For example, the ability to toggle how long to keep stats
    tables, or maybe even a conditional trigger system.
  * An optional XML-based stats feed. I think EOC has already implemented something
    like this.
  * Pre-built style templates
+ * Graphical installer
 
 /******************************
  * VI.   Project Management

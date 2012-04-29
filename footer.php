@@ -1,9 +1,9 @@
 <?php
 
 /*
- * config.php                                                           
- *                                                                      
- * Last modified 04/17/2005 by hpxchan                                  
+ * footer.php
+ *
+ * Last modified 04/16/2005 by hpxchan                                                           
  *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      
@@ -13,20 +13,10 @@
  * of the License, or (at your option) any later version.           
  */
 
-$lock_hole = 'color';
+$html_out .= '</td></tr></table>' . "\n";
+$html_out .= '<p class="fineprint">Powered by <a href="http://sage-stats.sourceforge.net">Sage</a> &copy; 2005 <a href="http://samuraidev.com">SamuraiDev</a></p>' . "\n";
+$html_out .= '</div></body></html>';
 
-$lock_key = 'sage';
-
-$db_type = 'mysql';
-
-$db_host = 'mysql-sage.example.com';
-
-$db_user = 'example_database_user';
-
-$db_pass = 'example_database_password';
-
-$db_name = 'example_database_name';
-
-$team_number = 37941;
+print( $html_out );
 
 ?>
