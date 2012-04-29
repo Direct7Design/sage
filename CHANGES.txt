@@ -72,3 +72,8 @@ extremely more accurate stats off the bat.
 The date has been changed from that provided by Stanford (on the stats
 pages) to the date of the server running Sage. Also, CURL and its
 functions have replaced the insecure fopen.
+
+    1.1.3
+
+Fixed an off-by-one error in process_home.php that prevented the eighth
+table from being created, stopping the application in its tracks.

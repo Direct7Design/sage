@@ -3,7 +3,7 @@
 /*
  * process_home.php                                                     
  *                                                                      
- * Last modified 04/20/2005 by hpxchan                                  
+ * Last modified 04/21/2005 by hpxchan                                  
  *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      
@@ -108,10 +108,11 @@ function process_home( $rid, $insert_table, $team_number, $type, $name, $rank, $
         $this_where_clause = "WHERE `rid` = '$rid';";
         $last_table_select = "SELECT * FROM `" . $tables[( $tables_last - 1 )]['name'] . "` " . $this_where_clause;
 
-        // increment age and update the table
+        // increment age and update the table, then set age back to where it should be
         $age++;
         $stats_index_update = "UPDATE `stats_index` SET `age`=" . $age . ' ' . $this_where_clause;
         $db_object->sql_query( $stats_index_update ) or die( 'Could not update stats_index<br />' . $stats_index_update . '<br />' . $db_object->sql_error() . '<br />' );
+        $age--;
         $first_table = $stats_index_array[5];
 
         // get info from last table
