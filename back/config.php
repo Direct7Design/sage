@@ -4,9 +4,9 @@
 // #                                                                    #
 // #   config.php                                                       #
 // #                                                                    #
-// #   Last Modified: 02/16/2005                                        #
+// #   Last Modified: 03/10/2005                                        #
 // #                                                                    #
-// #   Sage version 0.01                                                #
+// #   Sage version 0.02                                                #
 // #                                                                    #
 // ######################################################################
 // #                                                                    #
@@ -21,13 +21,13 @@
 // #                                                                    #
 // ######################################################################
 
-$lockHole = 'folding';
+$lockHole = 'color';
 
-$lockKey = 'athome';
+$lockKey = 'sage';
 
-$dbHost = 'mysql_database_host';
+$dbHost = 'mysql_database_hostname';
 
-$dbUser = 'mysql_database_user';
+$dbUser = 'mysql_database_username';
 
 $dbPass = 'mysql_database_password';
 
