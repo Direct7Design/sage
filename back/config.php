@@ -13,22 +13,22 @@
  * of the License, or (at your option) any later version.           
  */
 
-$lock_hole = 'black';
+$lock_hole = 'color';
 
-$lock_key = 'bear';
+$lock_key = 'sage';
 
 $db_type = 'mysql';
 
-$db_host = '127.0.0.1';
+$db_host = 'database_hostname';
 
-$db_user = 'sageusr';
+$db_user = 'database_username';
 
-$db_pass = 'p5BGKfC3m6apqvmz';
+$db_pass = 'database_password';
 
-$db_name = 'sage';
+$db_name = 'database_name';
 
-$team_number = 32;
+$team_number = 1971;
 
-$server_GMT_offset = -5;
+$server_GMT_offset = -8;
 
 ?>
