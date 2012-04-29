@@ -3,9 +3,9 @@
 /*
  * extract_home.php                                                     
  *                                                                      
- * Last modified 04/14/2005 by hpxchan                                  
+ * Last modified 04/16/2005 by hpxchan                                  
  *                                                                      
- * Sage Folding@Home Stats System, version 0.02                         
+ * Sage Folding@Home Stats System, version 1.0.7                         
  *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      

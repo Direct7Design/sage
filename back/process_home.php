@@ -3,9 +3,9 @@
 /*
  * process_home.php                                                     
  *                                                                      
- * Last modified 04/14/2005 by hpxchan                                  
+ * Last modified 04/16/2005 by hpxchan                                  
  *                                                                      
- * Sage Folding@Home Stats System, version 0.02                         
+ * Sage Folding@Home Stats System, version 1.0.7                         
  *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      
@@ -26,6 +26,11 @@ function process_home( $insert_table, $team_number, $type, $name, $rank, $tranku
     // $main_stats_array holds stuff we're going to put into the current table
     // we'll add more to it later
     $main_stats_array = array( 'team_number' => $team_number, 'row_type' => $type, 'name' => $name, 'rank' => $rank, 'trankusers' => $trankusers, 'wus' => $wus, 'points' => $points );
+    if( $wus >= 1 ) {
+        $main_stats_array['points_per_wu'] = floor( $points / $wus );
+    } else {
+        $main_stats_array['points_per_wu'] = 0;
+    }
 
     // if the current table is the only table (THIS PART IS NOT FUN)
     if( $tables_last == 0 ) {

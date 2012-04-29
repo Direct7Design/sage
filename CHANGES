@@ -4,9 +4,9 @@
  * Log of all major project changes (as many as we can document
  * while retaining our sanity, at least ;-) )
  *
- * Last modified 03/12/2005 by hpxchan                                  
+ * Last modified 04/16/2005 by hpxchan                                  
  *                                                                      
- * Sage Folding@Home Stats System, version 0.02                         
+ * Sage Folding@Home Stats System, version 1.0.7                         
  *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      
@@ -20,13 +20,34 @@
 
 Sage comes into existence
 
-    0.02
+    1.0.0 - 1.0.4
 
 We made a number of major fundamental changes, including redesign of
 the database structure, general code reorganization, and a complete
 redesign of the frontend GUI. The README was redesigned, and the
 CONTRIB, CHANGES, and LICENSE files were added to the slew. Sage
-0.01 was a complete mess, so 0.02 is an attempt to approach the
+0.01 was a complete mess, so 1.0.* is an attempt to approach the
 problem (of stats extraction, processing, and display) in a totally
 different way, circumventing many of the obstacles encountered by
-0.01 in the process.
+0.01 in the process. We changed our numbering system to Linux kernel
+version style, so 1.0.* was originally intended to be named 0.02.
+Versions 1.0.0 to 1.0.4 specifically were partial releases of the Sage 
+backend processing scripts.
+
+    1.0.5
+
+Sage 1.0.5 is the first release containing the complete sources for
+the Sage 1.0.* backend. It does not contain the frontend.
+
+    1.0.6
+
+Sage 1.0.6 contains sources for the backend only, similar to 1.0.5.
+A division by zero bug is fixed, and a few database table structures
+are optimized.
+
+    1.0.7
+
+Another critical division by zero bug has been fixed, and the code for
+processing points_per_wu has been moved out of the conditional blocks
+and into the main part of the process_home function (since it is
+processed the same way, regardless of the number of existing tables).

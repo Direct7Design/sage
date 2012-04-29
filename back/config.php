@@ -3,9 +3,9 @@
 /*
  * config.php                                                           
  *                                                                      
- * Last modified 04/14/2005 by hpxchan                                  
+ * Last modified 04/16/2005 by hpxchan                                  
  *                                                                      
- * Sage Folding@Home Stats System, version 0.02                         
+ * Sage Folding@Home Stats System, version 1.0.7                         
  *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      
@@ -21,14 +21,14 @@ $lock_key = 'sage';
 
 $db_type = 'mysql';
 
-$db_host = 'sql_database_hostname';
+$db_host = 'database_hostname';
 
-$db_user = 'sql_database_username';
+$db_user = 'database_username';
 
-$db_pass = 'sql_database_password';
+$db_pass = 'database_password';
 
-$db_name = 'sql_database_name';
+$db_name = 'database_name';
 
-$team_number = 37941;
+$team_number = 1971;
 
 ?>
