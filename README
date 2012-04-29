@@ -1,0 +1,81 @@
+############################################################
+#                                                          #
+#      Insert Cool ASCII Art Here To Claim Your Prize      #
+#                                                          #
+#            Sage Folding@Home Web Stats System            #
+#                                                          #
+#                      Version 0.01                        #
+#                                                          #
+#              Released 02/16/2005 21:00 CST               #
+#                                                          #
+#                Licensed Under the GPL v2                 #
+#                                                          #
+#              Copyright (C) 2005 SamuraiDev               #
+#                                                          #
+#                 http://samuraidev.com                    #
+#                                                          #
+############################################################
+#                                                          #
+#   Project Contributors         Roles                     #
+#   _______________________      _______________________   #
+#                                                          #
+#   hpxchan                      Project Manager           #
+#                                                          #
+#   samuraisam                   Supplier of Good Ideas    #
+#                                                          #
+############################################################
+#                                                          #
+#                          README                          #
+#                                                          #
+############################################################
+
+To install, first copy all of the included files to your
+webserver. 
+
+Then, create a new database (or use an existing one, if you
+like living on the edge). This database must be in the 
+mysql flavor. Alternative database API support is coming
+later.
+
+Next, edit "config.php". It will be in the "back"
+directory.
+
+$lockHole and $lockKey should be short, alphanumeric (to be
+safe) strings. They must be used as a GET name/value pair
+to refresh_root.php in order to run it (this is to prevent
+abuse by spiders and humans). The defaults are okay, but
+you should change them to better protect the database from
+malicious earth-dwellers. Of the GET name/value pair,
+$lockHole is the name, and $lockKey is the value.
+
+$dbHost, $dbUser, $dbPass, and $dbName are strings
+containing hostname, username, password, and database name
+information. Note, Sage currently only supports MySQL.
+This will change soon. This will change even sooner if
+somebody contacts me (the samuraidev forums should be
+adequate) in request of additional database support.
+
+$teamNumber is an integer containing the team number of the
+Folding@Home team whose stats you want to watch. In most
+cases, this should be your own team. It has been set at a
+default 37941 (my team) to help prevent syntax errors on
+your part.
+
+Now, save "config.php". 
+
+Set up refresh_root.php to run regularly, every three
+hours. On a Unix system, using Cron, you would add the
+following line to the crontab:
+
+0 */3 * * * /usr/bin/lynx -dump "http://team.com/sage/back/refresh_rooot.php?apples=oranges" >/dev/null
+
+Of course, you may have to compensate depending on the time
+zone of your server and the time zone of your users. Also,
+this example assumes your webserver is at team.com, that
+Sage is in the "sage" directory, and that you set $lockHole
+to "apples" and $lockKey to "oranges".
+
+If you do not run Unix and want to use Cron on your server,
+please follow the syntax of the URL in the above example 
+and use appropriate tools to complete the job.
+
