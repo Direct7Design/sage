@@ -4,7 +4,7 @@
 // #                                                                    #
 // #   process_home.php                                                 #
 // #                                                                    #
-// #   Last Modified: 03/10/2005                                        #
+// #   Last Modified: 03/11/2005                                        #
 // #                                                                    #
 // #   Sage version 0.02                                                #
 // #                                                                    #
@@ -21,9 +21,8 @@
 // #                                                                    #
 // ######################################################################
 
-if($lockHole != $lockKey)
+function process_home($teamNumber, $type, $name, $rank, $trankusers, $wus, $points)
 {
-	die('Killed: Unauthorized Connection');
 }
 
 ?>

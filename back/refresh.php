@@ -4,7 +4,7 @@
 // #                                                                    #
 // #   refresh.php                                                      #
 // #                                                                    #
-// #   Last Modified: 03/10/2005                                        #
+// #   Last Modified: 03/11/2005                                        #
 // #                                                                    #
 // #   Sage version 0.02                                                #
 // #                                                                    #
@@ -40,22 +40,39 @@ mysql_query('DROP TABLE `tables_index`;');
 
 include('date_lib.php');
 
-function get_index_table()
+function get_index_table($mode = 1)
 {
-	$indexTableSelect = 'SELECT * FROM `tables_index`;';
+	$indexTableSelect;
+	if($mode == 0)
+	{
+		$indexTableSelect = 'SELECT `name` FROM `tables_index` WHERE `rid` = 1;';
+	}
+	else
+	{
+		$mode = 1;
+		$indexTableSelect = 'SELECT * FROM `tables_index`;';
+	}
 	$indexTableResult = mysql_query($indexTableSelect);
 	if(!$indexTableResult)
 	{
 		return 0;
 	}
-	$indexTableArray = array();
-	$i = 0;
-	while($currentRow = mysql_fetch_row($indexTableResult))
+	if($mode == 1)
 	{
-		$indexTableArray[$i] = $currentRow;
-		$i++;
+		$indexTableArray = array();
+		$i = 0;
+		while($currentRow = mysql_fetch_row($indexTableResult))
+		{
+			$indexTableArray[$i] = $currentRow;
+			$i++;
+		}
+		return $indexTableArray;
 	}
-	return $indexTableArray;
+	elseif($mode == 0)
+	{
+		$currentRow = mysql_fetch_row($indexTableResult);
+		return $currentRow[0];
+	}
 }
 
 // Stanford team stats: http://vspx27.stanford.edu/daily_team_summary.txt
