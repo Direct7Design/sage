@@ -228,7 +228,7 @@ and Sage will /not/ work for that team.
 
 Do /NOT/ run the Sage stats-refreshing script (refresh.php, unless something changes)
 more than once every three hours. Stanford updates approximately every three hours, so
-it would be (a) pointless, (b) hopefully resultless, and (c) rude to Stanford to try
+it would be (a) pointless, (b) resultless, and (c) rude to Stanford to try
 and update your stats more often than the source the stats come from (Stanford).
 
 Want to help with Sage? Contact us through one of the methods listed in ``Project

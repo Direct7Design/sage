@@ -3,7 +3,7 @@
 /*
  * config.php                                                           
  *                                                                      
- * Last modified 04/17/2005 by hpxchan                                  
+ * Last modified 04/20/2005 by hpxchan                                  
  *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      

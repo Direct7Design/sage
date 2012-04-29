@@ -3,7 +3,7 @@
 /*
  * header.php
  *
- * Last modified 04/16/2005 by hpxchan                                                           
+ * Last modified 04/20/2005 by hpxchan                                                           
  *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      
@@ -36,7 +36,7 @@ $teams_index_select = 'SELECT `name` FROM `stats_index` WHERE `row_type` = 0 AND
 $teams_index_handle = $db->sql_query( $teams_index_select );
 $teams_index_array = array();
 $teams_index_array  = $db->sql_fetchrow( $teams_index_handle );
-$html_out .= '<h1>Folding@Home<br />Stats</h1><h2>' . htmlspecialchars( $teams_index_array[0] ) . '</h2><h2>' . $team_number . '</h2>' . "\n";
+$html_out .= '<h1>Sage<br />Folding@Home<br />Stats</h1><h2>' . htmlspecialchars( $teams_index_array[0] ) . '</h2><h2>' . $team_number . '</h2>' . "\n";
 
 $html_out .= '<form method="get" action="display.php"><fieldset>' . "\n";
 

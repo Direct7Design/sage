@@ -3,7 +3,7 @@
 /*
  * extract_home.php                                                     
  *                                                                      
- * Last modified 04/18/2005 by hpxchan                                  
+ * Last modified 04/20/2005 by hpxchan                                  
  *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      
@@ -47,13 +47,18 @@ $tables_array_last = 0;
 
 $done_array = array();
 
-$team_page_handle = fopen( $stanford_team_url, 'r' );
+$ch = curl_init();
+
+curl_setopt( $ch, CURLOPT_URL, $stanford_team_url );
+curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+
+$team_page_handle = explode( "\n", curl_exec( $ch ) );
 
 if( !$team_page_handle ) {
     die('Killed: Invalid Team Page: ' . $stanford_team_url);
 }
 
-while( !feof( $team_page_handle ) )
+foreach( $team_page_handle as $lines_count => $current_line )
 {
     $current_line = fgets( $team_page_handle, 4096 );
 
@@ -61,6 +66,7 @@ while( !feof( $team_page_handle ) )
 
     } elseif( $lines_count == 3 ) { // if it is the date line
 
+/* This stuff is from Sage 1.1.1 and earlier... it may be needed later.
         $date_array = explode( " ", $current_line );
         $time_array = explode( ":", $date_array[3] );
         $day_of_week = day_to_number( $date_array[0] );
@@ -71,6 +77,17 @@ while( !feof( $team_page_handle ) )
         $year = Trim( $date_array[5] );
 
         $current_table_name = '' . $year . add_leading_zeros( $month, 2 ) . add_leading_zeros( $day_of_month, 2 ) . add_leading_zeros( $hour, 2 );
+*/
+
+        $date_array = array();
+        $date_array = getdate();
+        $year = $date_array['year'];
+        $month = $date_array['mon'];
+        $day_of_month = $date_array['mday'];
+        $hour = $date_array['hours'];
+
+        $current_table_name = '' . $year . add_leading_zeros( $month, 2 ) . add_leading_zeros( $day_of_month, 2 ) . add_leading_zeros( $hour, 2 );
+
         $current_table_name = substr( $current_table_name, 0, 10 );
         $table_create = 'CREATE TABLE `' . $current_table_name . '` (rid VARCHAR(32) PRIMARY KEY NOT NULL, team_number MEDIUMINT, row_type SMALLINT, name VARCHAR(75), rank INT, rank_last_update MEDIUMINT, rank_last_day MEDIUMINT, rank_last_week MEDIUMINT, rank_last_month INT, rank_last_year INT, rank_per_hour MEDIUMINT, rank_per_update MEDIUMINT, rank_per_day MEDIUMINT, rank_per_week MEDIUMINT, rank_per_month INT, rank_per_year INT, trankusers INT, trankusers_last_update MEDIUMINT, trankusers_last_day MEDIUMINT, trankusers_last_week MEDIUMINT, trankusers_last_month MEDIUMINT, trankusers_last_year INT, trankusers_per_hour MEDIUMINT, trankusers_per_update MEDIUMINT, trankusers_per_day MEDIUMINT, trankusers_per_week MEDIUMINT, trankusers_per_month MEDIUMINT, trankusers_per_year INT, wus BIGINT, wus_last_update MEDIUMINT, wus_last_day MEDIUMINT, wus_last_week INT, wus_last_month INT, wus_last_year BIGINT, wus_per_hour MEDIUMINT, wus_per_update MEDIUMINT, wus_per_day MEDIUMINT, wus_per_week INT, wus_per_month INT, wus_per_year BIGINT, points BIGINT, points_last_update INT, points_last_day INT, points_last_week INT, points_last_month BIGINT, points_last_year BIGINT, points_per_hour MEDIUMINT, points_per_update INT, points_per_day INT, points_per_week INT, points_per_month BIGINT, points_per_year BIGINT, points_per_wu MEDIUMINT);';
         $db->sql_query( $table_create ) or die( 'Could not create table ' . $current_table_name . '<br />' . $table_create . '<br />' . $db->sql_error() );
@@ -120,6 +137,6 @@ if( ! $done_array[$team_rid] ) {
     $done_array[$team_rid] = 1;
 }
 
-fclose( $team_page_handle );
+curl_close( $ch );
 
 ?>

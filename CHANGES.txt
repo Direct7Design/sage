@@ -4,7 +4,7 @@
  * Log of all major project changes (as many as we can document
  * while retaining our sanity, at least ;-) )
  *
- * Last modified 04/18/2005 by hpxchan                                  
+ * Last modified 04/20/2005 by hpxchan                                  
  *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      
@@ -66,3 +66,9 @@ minor fixes and optimizations have been made to the backend code.
 The initial run code (the code that is executed the first time you run
 Sage with a particular database) has been cleaned up, resulting in
 extremely more accurate stats off the bat.
+
+    1.1.2
+
+The date has been changed from that provided by Stanford (on the stats
+pages) to the date of the server running Sage. Also, CURL and its
+functions have replaced the insecure fopen.
