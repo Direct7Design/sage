@@ -72,8 +72,8 @@ foreach( $tables_index_array as $key => $value ) {
 
 $html_out .= '</select></p><p>' . "\n";
 $html_out .= '<input type="submit" value="Change" /></p></fieldset></form>' . "\n";
-$html_out .= '<h3><a class="button" href="index.php?date=' . $date . '">Team Summary</a></h3>' . "\n";
-$html_out .= '<h3><a class="button" href="list.php?date=' . $date . '">User List</a></h3>' . "\n";
+$html_out .= '<h3><a class="ah3" href="index.php?date=' . $date . '">Team Summary</a></h3>' . "\n";
+$html_out .= '<h3><a class="ah3" href="list.php?date=' . $date . '">User List</a></h3>' . "\n";
 $html_out .= '</td><td class="righttd">' . "\n";
 
 ?>
