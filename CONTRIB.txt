@@ -1,9 +1,9 @@
-<?php
-
 /*
- * config.php                                                           
+ * CONTRIB
  *                                                                      
- * Last modified 04/24/2005 by hpxchan                                  
+ * List of major project contributors (developers, financial donors, etc.)
+ *
+ * Last modified 04/24/2005 by hpxchan                                                           
  *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      
@@ -13,22 +13,12 @@
  * of the License, or (at your option) any later version.           
  */
 
-$lock_hole = 'color';
+    hpxchan
 
-$lock_key = 'sage';
+    SamuraiSam
 
-$db_type = 'mysql';
+    JWhy
 
-$db_host = 'database_hostname';
+    Midnight Dream
 
-$db_user = 'database_username';
-
-$db_pass = 'database_password';
-
-$db_name = 'database_name';
-
-$team_number = 1971;
-
-$server_GMT_offset = -8;
-
-?>
+    The phpBB development team (http://phpbb.com)

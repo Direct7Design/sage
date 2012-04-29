@@ -65,7 +65,7 @@ foreach( $cats_array as $key => $value ) {
         $html_out .= '<tr><td colspan="5" class="emptyrow">&nbsp;</td></tr>' . "\n";
     } elseif( $value == 2 ) {
         if( $k % 2 == 0 ) {
-            $html_out .= '<tr><th class="profile">' . $key . '</th><td class="bodytd1" colspan="4">' . $big_array[52] . '</td></tr>' . "\n";
+            $html_out .= '<tr><th class="leftbth1">' . $key . '</th><td class="bodytd1" colspan="4">' . $big_array[52] . '</td></tr>' . "\n";
         } else {
             $html_out .= '<tr><th class="leftbth2">' . $key . '</th><td class="bodytd2" colspan="4">' . $big_array[52] . '</td></tr>' . "\n";
         }
