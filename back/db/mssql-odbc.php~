@@ -1,9 +1,11 @@
 <?php
 
 /*
- * msaccess.php                                                          
+ * mssql-odbc.php                                                          
  *                                                                      
  * Last modified 04/16/2005 by hpxchan                                  
+ *                                                                      
+ * Sage Folding@Home Stats System, version 1.0.7                         
  *                                                                      
  * Copyright (C) 2005 SamuraiDev                                        
  *                                                                      
@@ -20,13 +22,12 @@
 if(!defined("SQL_LAYER"))
 {
 
-define("SQL_LAYER","msaccess");
+define("SQL_LAYER","mssql-odbc");
 
 class sql_db
 {
 
 	var $db_connect_id;
-	var $result_ids = array();
 	var $result;
 
 	var $next_id;
@@ -101,8 +102,6 @@ class sql_db
 				$this->in_transaction = TRUE;
 			}
 
-			$query = str_replace("LOWER(", "LCASE(", $query);
-
 			if( preg_match("/^SELECT(.*?)(LIMIT ([0-9]+)[, ]*([0-9]+)*)?$/s", $query, $limits) )
 			{
 				$query = $limits[1];
@@ -115,7 +114,7 @@ class sql_db
 					$query = "TOP " . ( $row_offset + $num_rows ) . $query;
 				}
 
-				$this->result = odbc_exec($this->db_connect_id, "SELECT $query");
+				$this->result = odbc_exec($this->db_connect_id, "SELECT $query"); 
 
 				if( $this->result )
 				{
@@ -146,9 +145,7 @@ class sql_db
 						$row_inner++;
 					}
 
-					$this->num_rows[$this->result] = count($this->result_rowset[$this->result]);
-
-					odbc_free_result($this->result);
+					$this->num_rows[$this->result] = count($this->result_rowset[$this->result]);	
 				}
 
 			}
@@ -163,7 +160,7 @@ class sql_db
 					{
 						if( odbc_fetch_row($result_id) )
 						{
-							$this->next_id[$this->db_connect_id] = odbc_result($result_id, 1);
+							$this->next_id[$this->db_connect_id] = odbc_result($result_id, 1);	
 							$this->affected_rows[$this->db_connect_id] = odbc_num_rows($this->result);
 						}
 					}
@@ -195,7 +192,7 @@ class sql_db
 			{
 				$this->in_transaction = FALSE;
 
-				if ( !@odbc_commit($this->db_connect_id) )
+				if ( !odbc_commit($this->db_connect_id) )
 				{
 					odbc_rollback($this->db_connect_id);
 					odbc_autocommit($this->db_connect_id, true);
@@ -203,6 +200,8 @@ class sql_db
 				}
 				odbc_autocommit($this->db_connect_id, true);
 			}
+
+			odbc_free_result($this->result);
 
 			return $this->result;
 		}
@@ -230,7 +229,7 @@ class sql_db
 	//
 	function sql_numrows($query_id = 0)
 	{
-		if( !$query_id )
+		if( !$query_id ) 
 		{
 			$query_id = $this->result;
 		}
@@ -313,9 +312,10 @@ class sql_db
 		{
 			if( $row < $this->num_rows[$query_id] )
 			{
-				$getrow = ($row == -1) ? $this->current_row[$query_id] - 1 : $row;
+				$getrow = ( $row == -1 ) ? $this->current_row[$query_id] - 1 : $row;
 
 				return $this->result_rowset[$query_id][$getrow][$this->field_names[$query_id][$field]];
+
 			}
 			else
 			{
@@ -374,8 +374,8 @@ class sql_db
 
 	function sql_error()
 	{
-		$error['code'] = "";//odbc_error($this->db_connect_id);
-		$error['message'] = "Error";//odbc_errormsg($this->db_connect_id);
+		$error['code'] = odbc_error($this->db_connect_id);
+		$error['message'] = odbc_errormsg($this->db_connect_id);
 
 		return $error;
 	}
