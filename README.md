@@ -1,20 +1,20 @@
 /*
- * README                                                     
+ * README
  *                                                                      
  * Read me first for installation help, notes, and references
  *
- * Last modified 04/24/2005 by hpxchan                                  
+ * Last modified 04/24/2005 by hpxchan
  *                                                                      
- * Copyright (C) 2005 SamuraiDev                                        
+ * Copyright (C) 2005 SamuraiDev
  *                                                                      
- * This program is free software; you can redistribute it and/or    
- * modify it under the terms of the GNU General Public License      
- * as published by the Free Software Foundation; either version 2   
- * of the License, or (at your option) any later version.           
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
  */
 
 /******************************
- * I.    Table of Contents    
+ * I.    Table of Contents
  ******************************/
 
 I.    Table of Contents
