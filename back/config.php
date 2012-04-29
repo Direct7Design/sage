@@ -3,7 +3,7 @@
 /*
  * config.php                                                           
  *                                                                      
- * Last modified 03/29/2005 by hpxchan                                  
+ * Last modified 04/14/2005 by hpxchan                                  
  *                                                                      
  * Sage Folding@Home Stats System, version 0.02                         
  *                                                                      
@@ -19,18 +19,16 @@ $lock_hole = 'color';
 
 $lock_key = 'sage';
 
-// change to your database type; see db.php for types
 $db_type = 'mysql';
 
-$db_host = 'database_host';
+$db_host = 'sql_database_hostname';
 
-$db_user = 'database_user';
+$db_user = 'sql_database_username';
 
-$db_pass = 'database_password';
+$db_pass = 'sql_database_password';
 
-$db_name = 'database_name';
+$db_name = 'sql_database_name';
 
-// change to your team number
 $team_number = 37941;
 
 ?>
