@@ -17,11 +17,11 @@
 
 
 
-I.    Table of Contents
------------------------
+Table of Contents
+======
 
 
-II.   Project Files List
+1.   Project Files List
 -----------------------
     -    README.txt
     -    CHANGES.txt
@@ -38,101 +38,104 @@ II.   Project Files List
     -    footer.php
     -    default.css
 
-III.  System Requirements
+2.  System Requirements
 -----------------------
     -    Server programming languages
     -    Server database system
     -    Client web browser
 
-IV.   Installation and Operation
+3.   Installation and Operation
 -----------------------
     -    General installation directions
     -    General operation directions
     -    Unix-specific additional information
 
-*  Notes and Warnings
+4.  Notes and Warnings
+-----------------------
 
-*  Project Management
-   
+5.  Project Management
+-----------------------
 
-*  Project Files List
+* * *
 
+1. Project File List
+======
 
-*  README.md
+**README.md
 
 Contains general project information, installation and operating guides,
 system requirements, project management information (including contact
 information).
 
- *    CHANGES.txt
+**CHANGES.txt**
 
 A log of all significant changes made directly to the Sage project, organized
 by release.
 
- *    CONTRIB.txt
+**CONTRIB.txt**
 
 A list of all project contributors, including developers, beta-testers,
 financial donors, particularly useful feedback-giving users, etc.
 
- *    LICENSE.txt
+**LICENSE.txt**
 
 The full license under which the Sage Folding@Home Stats System is made
 available to you, whoever you are. 
 
- *    config.php
+**config.php**
 
 A php file consisting of a number of program-critical variable definitions
 used as configuration options, included at the top of the refresh.php driver
 script.
 
- *    date_lib.php
+**date_lib.php**
 
 A general (not Sage-specific) library of functions dealing with date and
 time issues (obviously, ones that have not already been covered in the 
 official PHP function set).
 
- *    refresh.php
+**refresh.php**
 
 The driver script for the Sage backend (the processing that occurs
 periodically to update the stats on your server). Includes date_lib.php,
 config.php, and extract_home.php.
 
- *    extract_home.php
+**extract_home.php**
 
 Helper script included by refresh.php. Extracts user and team information
 from Stanford's Folding@Home stats text files, sorts the relevant values
 into variables, and passes those variables into functions from
 process_home.php. Includes process_home.php.
 
- *    process_home.php
+**process_home.php**
 
 Library of Sage-specific stats-processing functions included by other scripts
 in Sage to process relevant information and insert it into the database.
 
- *    index.php
+**index.php**
 
 Primary display script for the Sage frontend. Handles team and user summaries.
 
- *    list.php
+**list.php**
 
 Secondary display script for the Sage frontend. Displays lists of users, teams.
 
- *    header.php
+**header.php**
 
 Universal header for the Sage frontend; required by all frontend driver scripts
 (like index.php and list.php).
 
- *    footer.php
+**footer.php**
 
 Universal footer for the Sage frontend; required by all frontend driver scripts
 (like index.php and list.php).
 
- *    default.css
+**default.css**
 
 Default external stylesheet for the Sage frontend pages.
    
 
-III.  System Requirements
+5.  System Requirements
 -------------------------
 
 
