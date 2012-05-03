@@ -22,6 +22,7 @@ I.    Table of Contents
 
 
 II.   Project Files List
+-----------------------
     -    README.txt
     -    CHANGES.txt
     -    CONTRIB.txt
@@ -38,11 +39,13 @@ II.   Project Files List
     -    default.css
 
 III.  System Requirements
+-----------------------
     -    Server programming languages
     -    Server database system
     -    Client web browser
 
 IV.   Installation and Operation
+-----------------------
     -    General installation directions
     -    General operation directions
     -    Unix-specific additional information
@@ -150,9 +153,9 @@ III.  System Requirements
  * C.    Client web browser
          *       Ummm... general W3C-compliant browser... preferably not IE...
    
-/******************************
- * IV.   Installation and Operation
- ******************************/
+   
+IV.   Installation and Operation
+-----------------------
 
  * A.    General installation directions
 
@@ -212,9 +215,9 @@ its stats database every three hours, on the hour. Remember to substitute the im
 information in the example above for your own. I believe there is a way to use this with
 the php executable... but I'm not ready to provide help for that method at the moment.
 
-/******************************
- * V.    Notes and Warnings
- ******************************/
+
+V.    Notes and Warnings
+-----------------------
 
 Please make sure to customize config.php, especially $lock_hole and $lock_key.
 These two fields are used to prevent robots (and malicious humanoids) from
@@ -254,9 +257,9 @@ Future features (tentative, of course... just cool things we'd like to see):
  * Several pre-built style templates to choose from
  * Graphical installer
 
-/******************************
- * VI.   Project Management
- ******************************/
+
+VI.   Project Management
+-----------------------
    
 As of the last update of this file, Sage Folding@Home Stats System is
 managed by the ``SamuraiDev'' development team, and headed by SamuraiDev
