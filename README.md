@@ -52,9 +52,14 @@ Table of Contents
 
 4.  Notes and Warnings
 -----------------------
-
+	-What to do
+	-What not to do
+	
 5.  Project Management
 -----------------------
+	-where to ask questions
+	-development
+
 
 * * *
 
